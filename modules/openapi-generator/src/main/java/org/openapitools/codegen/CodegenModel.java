@@ -55,6 +55,7 @@ public class CodegenModel implements IJsonSchemaValidationProperties {
     // The name of the class is derived from the OpenAPI schema name with formatting rules applied.
     // The classname is derived from the OpenAPI schema name, with sanitization and escaping rules applied.
     public String classname;
+    public String classPackagename;
     // The value of the 'title' attribute in the OpenAPI document.
     public String title;
     public String description, classVarName, modelJson, dataType, xmlPrefix, xmlNamespace, xmlName;

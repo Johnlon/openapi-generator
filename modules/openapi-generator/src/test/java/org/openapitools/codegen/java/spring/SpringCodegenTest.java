@@ -33,14 +33,14 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
-import static org.openapitools.codegen.TestUtils.assertFileContains;
-import static org.openapitools.codegen.TestUtils.assertFileNotContains;
+import static org.openapitools.codegen.TestUtils.*;
 import static org.openapitools.codegen.languages.SpringCodegen.RESPONSE_WRAPPER;
 import static org.testng.Assert.assertEquals;
 
@@ -82,9 +82,20 @@ public class SpringCodegenTest {
 
         generator.opts(input).generate();
 
-        assertFileContains(Paths.get(outputPath + "/src/main/java/org/openapitools/api/ZebrasApi.java"),
-                "AnimalParams");
-        assertFileContains(Paths.get(outputPath + "/src/main/java/org/openapitools/model/AnimalParams.java"),
+        Files.walk(Paths.get(outputPath))
+                .filter(Files::isRegularFile)
+                .forEach(x -> System.out.println("FILE: " + x));
+
+        Path path = Paths.get(outputPath + "/src/main/java/org/openapitools/api/ZebrasApi.java");
+
+        System.out.println("PATH = " + path.toAbsolutePath());
+//        assertFileContains(path,
+//                //JL"animal.Params");
+//                " AnimalParams");
+        assertFileContains(path,
+                //JL"animal.Params");
+                "import org.openapitools.model.xlr8.AnimalParams;");
+        assertFileContains(Paths.get(outputPath + "/src/main/java/org/openapitools/model/xlr8/AnimalParams.java"),
                 "@org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE)",
                 "@org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)");
     }

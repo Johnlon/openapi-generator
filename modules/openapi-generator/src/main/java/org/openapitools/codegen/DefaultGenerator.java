@@ -1034,13 +1034,13 @@ public class DefaultGenerator implements Generator {
         for (String resourcePath : paths.keySet()) {
             PathItem path = paths.get(resourcePath);
             processOperation(resourcePath, "get", path.getGet(), ops, path);
-            processOperation(resourcePath, "head", path.getHead(), ops, path);
-            processOperation(resourcePath, "put", path.getPut(), ops, path);
-            processOperation(resourcePath, "post", path.getPost(), ops, path);
-            processOperation(resourcePath, "delete", path.getDelete(), ops, path);
-            processOperation(resourcePath, "patch", path.getPatch(), ops, path);
-            processOperation(resourcePath, "options", path.getOptions(), ops, path);
-            processOperation(resourcePath, "trace", path.getTrace(), ops, path);
+//            processOperation(resourcePath, "head", path.getHead(), ops, path);
+//            processOperation(resourcePath, "put", path.getPut(), ops, path);
+//            processOperation(resourcePath, "post", path.getPost(), ops, path);
+//            processOperation(resourcePath, "delete", path.getDelete(), ops, path);
+//            processOperation(resourcePath, "patch", path.getPatch(), ops, path);
+//            processOperation(resourcePath, "options", path.getOptions(), ops, path);
+//            processOperation(resourcePath, "trace", path.getTrace(), ops, path);
         }
         return ops;
     }

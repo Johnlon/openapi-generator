@@ -12,11 +12,12 @@ paths:
     get:
       operationId: getZebras
       parameters:
-        - in: query
-          name: limit
-          schema:
-            type: number
         - $ref: '#/components/parameters/SearchParams'
+  /xlr8zebras:
+    get:
+      operationId: getxlr8Zebras
+      parameters:
+        - $ref: '#/components/parameters/GoodSearchParams'
 components:
   parameters:
     SearchParams:
@@ -26,12 +27,49 @@ components:
       style: form
       explode: true
       schema:
-        $ref: '#/components/schemas/AnimalParams'
+        $ref: '#/components/schemas/xlr8.AnimalParams'
+    GoodSearchParams:
+      name: animalParams
+      description: Search animal grouped parameters
+      in: query
+      style: form
+      explode: true
+      schema:
+        $ref: '#/components/schemas/xlr8GoodAnimalParams'
   schemas:
-    AnimalParams:
+    xlr8.AnimalParams:
       type: object
       properties:
         born:
+          type: string
+          format: date
+          example: '2019-12-01'
+        xlr8Property:
+          type: string
+          format: date
+          example: '2019-12-01'
+        lastSeen:
+          type: string
+          format: date-time
+          example: '2020-02-22T10:30:00.000'
+        status:
+          type: integer
+          enum: [0,1]
+          default: 0
+        name:
+          type: string
+          example: 'Marty'
+        age:
+          type: integer
+          example: 15
+    xlr8GoodAnimalParams:
+      type: object
+      properties:
+        born:
+          type: string
+          format: date
+          example: '2019-12-01'
+        xlr8Property:
           type: string
           format: date
           example: '2019-12-01'

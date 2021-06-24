@@ -1274,7 +1274,9 @@ public class DefaultCodegen implements CodegenConfig {
      * @return the file name of the model
      */
     public String toModelFilename(String name) {
-        return camelize(name);
+        String s = name.replaceAll("\\.", "/");
+        return s; // JLcamelize(name);
+        //return camelize(name);
     }
 
     /**
@@ -2298,7 +2300,7 @@ public class DefaultCodegen implements CodegenConfig {
         m.unescapedDescription = schema.getDescription();
         m.classname = toModelName(name);
         m.classVarName = toVarName(name);
-        m.classFilename = toModelFilename(name);
+        m.classFilename = toModelFilename(name).replaceAll("\\.", "/"); //JL
         m.modelJson = Json.pretty(schema);
         m.externalDocumentation = schema.getExternalDocs();
         if (schema.getExtensions() != null && !schema.getExtensions().isEmpty()) {
@@ -5227,7 +5229,7 @@ public class DefaultCodegen implements CodegenConfig {
      */
     @SuppressWarnings("static-method")
     public String sanitizeName(String name) {
-        return sanitizeName(name, "\\W");
+        return sanitizeName(name, "[^.\\w]");
     }
 
     @Override

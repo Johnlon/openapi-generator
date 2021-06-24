@@ -766,7 +766,7 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
             return importMapping.get(name);
         }
 
-        final String sanitizedName = sanitizeName(name);
+        final String sanitizedName = name; //JLsanitizeName(name);
 
         String nameWithPrefixSuffix = sanitizedName;
         if (!StringUtils.isEmpty(modelNamePrefix)) {
@@ -781,7 +781,8 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
 
         // camelize the model name
         // phone_number => PhoneNumber
-        final String camelizedName = camelize(nameWithPrefixSuffix);
+        final String camelizedName = nameWithPrefixSuffix; //JL camelize(nameWithPrefixSuffix);
+//        final String camelizedName = camelize(nameWithPrefixSuffix);
 
         // model name cannot use reserved keyword, e.g. return
         if (isReservedWord(camelizedName)) {
@@ -803,7 +804,8 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
     @Override
     public String toModelFilename(String name) {
         // should be the same as the model name
-        return toModelName(name);
+        String s = toModelName(name);
+        return s.replaceAll("\\.", "/");
     }
 
     @Override
@@ -1373,7 +1375,7 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
 
     @Override
     protected boolean needToImport(String type) {
-        return super.needToImport(type) && !type.contains(".");
+        return super.needToImport(type); //JL && !type.contains(".");
     }
 
     @Override

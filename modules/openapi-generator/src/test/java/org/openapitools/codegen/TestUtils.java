@@ -170,6 +170,17 @@ public class TestUtils {
             fail("Unable to evaluate file " + path.toString());
         }
     }
+    public static void assertFileMatches(Path path, String... lines) {
+        try {
+            String generatedFile = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+            String file = linearize(generatedFile);
+            assertNotNull(file);
+            for (String line : lines)
+                assertTrue(file.matches(linearize(line)), "File does not match line [" + line + "]");
+        } catch (IOException e) {
+            fail("Unable to evaluate file " + path.toString());
+        }
+    }
 
     public static String linearize(String target) {
         return target.replaceAll("\r?\n", "").replaceAll("\\s+", "\\s");
